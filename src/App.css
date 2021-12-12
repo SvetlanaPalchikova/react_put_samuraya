@@ -15,7 +15,7 @@
 }
 
 .header img {
-    width: 60px;
+    width: 100px;
 }
 
 .nav {
@@ -26,4 +26,9 @@
 .content {
     grid-area: c;
     background-color: cornflowerblue;
+}
+.content img{
+    width: 1000px;
+    height: 400px;
+    display:block;
 }
