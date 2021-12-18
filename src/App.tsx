@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import {start} from "repl";
-import {Header} from "./components/Header";
-import {Navbar} from "./components/Navbar";
-import {Profaile} from "./components/Profaile";
+import {Header} from "./components/Header/Header";
+import {Navbar} from "./components/Navbar/Navbar";
+import {Profaile} from "./components/Profaile/Profaile";
+
 
 const App = () => {
     return (

@@ -1,5 +1,6 @@
 import React from "react";
 import s from './Profaile.module.css';
+import {MyPosts} from "./MyPosts/MyPosts";
 
 export const Profaile = () => {
     return <div className={s.content}>
@@ -10,18 +11,7 @@ export const Profaile = () => {
             ava + description
         </div>
         <div>
-            My posts
-            <div>
-                New post
-            </div>
-            <div className={s.posts}>
-                <div className={s.item}>
-                    post 1
-                </div>
-                <div className={s.item}>
-                    post 2
-                </div>
-            </div>
+            <MyPosts/>
         </div>
     </div>
 }
