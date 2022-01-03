@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 
-
+//
 // type PropsDialogType={
-// value: string;
+// title: string;
 // }
 
-export const Dialogs = (props: any)=>{
+export const Dialogs = ()=>{
     return(
-        <div >
+        <div>
             Dialogs
         </div>
     )
