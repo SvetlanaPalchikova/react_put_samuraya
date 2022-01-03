@@ -11,8 +11,8 @@ export const MyPosts = () => {
             <button>Remove</button>
         </div>
         <div className={s.posts}>
-            <Post message="Hi, how are you?" like={"15 like"}/>
-            <Post message="It`s my first post" like={'20 like'}/>
+            <Post message="Hi, how are you?" like='like' likesCount={"20"} />
+            <Post message="It`s my first post" like='like' likesCount={"0"}/>
 
         </div>
     </div>

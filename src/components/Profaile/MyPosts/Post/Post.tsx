@@ -4,6 +4,7 @@ import s from './Post.module.css';
 type PostType={
     message: string;
     like: string;
+    likesCount: string;
 }
 export const Post = (props:PostType) => {
     return (
@@ -11,7 +12,7 @@ export const Post = (props:PostType) => {
             <img src="https://cs16planet.ru/steam-avatars/544"/>
             {props.message}
             <div>
-                <span>{props.like}</span>
+                <span>{props.like}</span>{props.likesCount}
             </div>
         </div>)
 }
