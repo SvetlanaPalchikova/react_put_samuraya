@@ -19,7 +19,6 @@ export type AppProps={
 
 const App = (props: AppProps) => {
     return (
-        <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
@@ -33,7 +32,7 @@ const App = (props: AppProps) => {
                    </Routes>
                 </div>
             </div>
-        </BrowserRouter>);
+);
 }
 
 export default App;

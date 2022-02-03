@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {state} from "./Redux/State";
+import {BrowserRouter} from "react-router-dom";
 
 
 // const dialogsData = [
@@ -25,9 +26,11 @@ import {state} from "./Redux/State";
 // ]
 
 ReactDOM.render(
-  <React.StrictMode>
+    <BrowserRouter>
+    <React.StrictMode>
     <App state={state}/>
-  </React.StrictMode>,
+  </React.StrictMode>
+    </BrowserRouter>,
   document.getElementById('root')
 );
 
