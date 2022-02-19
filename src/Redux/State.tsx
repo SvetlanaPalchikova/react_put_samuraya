@@ -1,32 +1,12 @@
 import React from "react";
-
-// type PostsType={
-//     id: number;
-//     message: string;
-//     like: string;
-//     likesCount: number
-// }
-//
-// type MessagesDataType={
-//     id: string;
-//     message: string
-// }
-//  type DialogsDataType={
-//     id: string;
-//     name: string
-//  }
+import {renderEntireTree} from "../render";
 
 export type StatePropsType = {
-     dialogsData: Array<DialogItemTypeProps>
+    dialogsData: Array<DialogItemTypeProps>
     messagesData: Array<MessageTypeProps>
     posts: Array<PostType>
 }
 
-
-// export type DialogsProps= {
-//     dialogsData: Array<DialogItemTypeProps>
-//     messagesData: Array<MessageTypeProps>
-// }
 export type DialogItemTypeProps = {
     name: string;
     id: string
@@ -36,7 +16,7 @@ export type MessageTypeProps = {
     id: string
 }
 
-export type PostType={
+export type PostType = {
     id: number
     message: string;
     like: string;
@@ -44,7 +24,7 @@ export type PostType={
 
 }
 export const state = {
-    dialogsData:[
+    dialogsData: [
         {id: '1', name: 'Dmitriy'},
         {id: '2', name: 'Svetlana'},
         {id: '3', name: 'Anna'},
@@ -56,8 +36,19 @@ export const state = {
         {id: '3', message: 'Yo'},
         {id: '4', message: 'Yo'}
     ],
-    posts:[
+    posts: [
         {id: 1, message: "Hi, how are you?", like: 'like', likesCount: 20},
         {id: 2, message: "It`s my first post?", like: 'like', likesCount: 0}
-        ]
+    ]
+}
+
+export const addPost = (text: string) => {
+    const newPost: PostType = {
+        id: new Date().getTime(),
+        like: "like",
+        message: text,
+        likesCount: 0
+    }
+    state.posts.push(newPost);
+    renderEntireTree(state);
 }

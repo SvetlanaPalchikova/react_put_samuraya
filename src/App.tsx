@@ -11,28 +11,29 @@ import {Settings} from "./components/Settings/Settings";
 import {StatePropsType} from "./Redux/State";
 
 
-export type AppProps={
-   state:StatePropsType
-
+export type AppProps = {
+    state: StatePropsType
+    addPost: (message: string) => void
 
 }
 
 const App = (props: AppProps) => {
     return (
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                   <Routes>
-                    <Route path='/dialogs'  element={<Dialogs dialogsData={props.state.dialogsData} messagesData={props.state.messagesData} />}/>
-                    <Route path='/profile' element={<Profile posts={props.state.posts}/>}/>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path='/dialogs' element={<Dialogs dialogsData={props.state.dialogsData}
+                                                             messagesData={props.state.messagesData}/>}/>
+                    <Route path='/profile' element={<Profile posts={props.state.posts} addPost={props.addPost}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
-                   </Routes>
-                </div>
+                </Routes>
             </div>
-);
+        </div>
+    );
 }
 
 export default App;
