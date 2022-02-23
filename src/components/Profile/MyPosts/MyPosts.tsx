@@ -1,40 +1,39 @@
-import React from "react";
+import React, {ChangeEvent, ChangeEventHandler} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {stringify} from "querystring";
+import {addPost, PostType} from "../../../Redux/State";
 
-export type PostPropsType = {
-    id: number;
-    message: string;
-    likesCount: number;
-    like: string;
-}
 
-export type  MyPostsType={
-    posts: Array<PostPropsType>;
-    addPost: (text: string)=> void
+export type  MyPostsType = {
+    posts: Array<PostType>;
+    addPost: (text: string) => void;
+    newPostText: string;
+    onPostChange:(postText: string)=>void
+    updateNewPostText: (newText: string)=>void
 }
 
 export const MyPosts = (props: MyPostsType) => {
     let postsElement =
-        props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like} likesCount={post.likesCount} />)
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-    const addPost=()=>{
-        if (newPostElement.current){
-            props.addPost(newPostElement.current.value)
-        }
-        // let text = newPostElement.current?.value;
-        // props.addPost(newPostElement.current? newPostElement.current.value : " ");
+        props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like}
+                                        likesCount={post.likesCount}/>)
+    const addPost = () => {
+            props.addPost(props.newPostText)
     }
+
+    const updateNewPostTextLocal = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
+    }
+
+
     return <div className={s.postsBlock}>
         <h3> My posts</h3>
         <div>
             <div>
-                <textarea ref={newPostElement}> </textarea>
+                <textarea onChange={updateNewPostTextLocal} />
             </div>
             <div className={s.button}>
                 <button onClick={addPost}>Add post</button>
-                <button >Remove</button>
+                <button>Remove</button>
             </div>
         </div>
         <div className={s.posts}>

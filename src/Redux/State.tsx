@@ -5,6 +5,9 @@ export type StatePropsType = {
     dialogsData: Array<DialogItemTypeProps>
     messagesData: Array<MessageTypeProps>
     posts: Array<PostType>
+    newPostText: string
+    updateNewPostText:(newText: string)=>void
+    onPostChange: (newText: string)=>void
 }
 
 export type DialogItemTypeProps = {
@@ -39,7 +42,10 @@ export const state = {
     posts: [
         {id: 1, message: "Hi, how are you?", like: 'like', likesCount: 20},
         {id: 2, message: "It`s my first post?", like: 'like', likesCount: 0}
-    ]
+    ],
+    newPostText: "itcamasutra",
+    updateNewPostText: (newText: string) => {},
+    onPostChange: (newText: string)=> {}
 }
 
 export const addPost = (text: string) => {
@@ -52,3 +58,13 @@ export const addPost = (text: string) => {
     state.posts.push(newPost);
     renderEntireTree(state);
 }
+
+export const updateNewPostText = (newText: string) => {
+    state.newPostText=newText;
+    renderEntireTree(state);
+}
+
+export const onPostChange = (newText: string) => {
+
+}
+
