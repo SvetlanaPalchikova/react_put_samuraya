@@ -43,7 +43,7 @@ export const state = {
         {id: 1, message: "Hi, how are you?", like: 'like', likesCount: 20},
         {id: 2, message: "It`s my first post?", like: 'like', likesCount: 0}
     ],
-    newPostText: "itcamasutra",
+    newPostText: "it-kamasutra.com",
     updateNewPostText: (newText: string) => {},
     onPostChange: (newText: string)=> {}
 }
@@ -52,10 +52,11 @@ export const addPost = (text: string) => {
     const newPost: PostType = {
         id: new Date().getTime(),
         like: "like",
-        message: text,
+        message: state.newPostText,
         likesCount: 0
     }
     state.posts.push(newPost);
+    state.newPostText = "";
     renderEntireTree(state);
 }
 

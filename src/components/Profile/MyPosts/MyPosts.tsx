@@ -8,8 +8,8 @@ export type  MyPostsType = {
     posts: Array<PostType>;
     addPost: (text: string) => void;
     newPostText: string;
-    onPostChange:(postText: string)=>void
-    updateNewPostText: (newText: string)=>void
+    onPostChange: (postText: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 export const MyPosts = (props: MyPostsType) => {
@@ -17,7 +17,7 @@ export const MyPosts = (props: MyPostsType) => {
         props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like}
                                         likesCount={post.likesCount}/>)
     const addPost = () => {
-            props.addPost(props.newPostText)
+        props.addPost(props.newPostText)
     }
 
     const updateNewPostTextLocal = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,7 +29,7 @@ export const MyPosts = (props: MyPostsType) => {
         <h3> My posts</h3>
         <div>
             <div>
-                <textarea onChange={updateNewPostTextLocal} />
+                <textarea onChange={updateNewPostTextLocal} value={props.newPostText}/>
             </div>
             <div className={s.button}>
                 <button onClick={addPost}>Add post</button>
