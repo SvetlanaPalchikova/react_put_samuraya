@@ -1,5 +1,6 @@
-import React from "react";
-import {renderEntireTree} from "../render";
+let renderEntireTree = (props: StatePropsType) => {
+    console.log("State changed")
+}
 
 export type StatePropsType = {
     dialogsData: Array<DialogItemTypeProps>
@@ -68,4 +69,9 @@ export const updateNewPostText = (newText: string) => {
 export const onPostChange = (newText: string) => {
 
 }
-
+type subscriberTypeProps = {
+    renderEntireTree: StatePropsType
+}
+ export const subscriber = (props: (state: StatePropsType) => void) => {
+     renderEntireTree(state)
+ }
