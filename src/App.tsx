@@ -16,6 +16,7 @@ export type AppProps = {
     addPost: (message: string) => void
     updateNewPostText: (newText: string)=>void
     onPostChange:(postText: string)=>void
+
 }
 
 const App = (props: AppProps) => {

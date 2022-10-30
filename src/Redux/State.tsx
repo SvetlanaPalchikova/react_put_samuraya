@@ -15,6 +15,7 @@ export type DialogItemTypeProps = {
     name: string;
     id: string
 }
+
 export type MessageTypeProps = {
     message: string
     id: string
@@ -27,6 +28,7 @@ export type PostType = {
     likesCount: number;
 
 }
+
 export const state = {
     dialogsData: [
         {id: '1', name: 'Dmitriy'},
@@ -69,9 +71,7 @@ export const updateNewPostText = (newText: string) => {
 export const onPostChange = (newText: string) => {
 
 }
-type subscriberTypeProps = {
-    renderEntireTree: StatePropsType
-}
- export const subscriber = (props: (state: StatePropsType) => void) => {
-     renderEntireTree(state)
+
+ export const subscriber = (observer: (state: StatePropsType) => void) => {
+     renderEntireTree = observer
  }
