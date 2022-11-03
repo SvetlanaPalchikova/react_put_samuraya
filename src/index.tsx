@@ -1,23 +1,22 @@
 
 import reportWebVitals from './reportWebVitals';
-import {state, subscriber} from "./Redux/State";
+import {store, StoreTypeProps} from "./Redux/State";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addPost, onPostChange, StatePropsType, updateNewPostText} from "./Redux/State";
 import {BrowserRouter} from "react-router-dom";
 
 
-export  let renderEntireTree = (state: StatePropsType )=> {
+export  let renderEntireTree = ()=> {
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
                 <App
-                    state={state}
-                    addPost={addPost}
-                    updateNewPostText={updateNewPostText}
-                    onPostChange={onPostChange}/>
+                    state={store.getState()}
+                    addPost={store.addPost}
+                    updateNewPostText={store.updateNewPostText}
+                    onPostChange={store.onPostChange}/>
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')
@@ -26,8 +25,8 @@ export  let renderEntireTree = (state: StatePropsType )=> {
 
 
 
-renderEntireTree(state);
+renderEntireTree(store.getState());
 
-subscriber(renderEntireTree)
+store.subscriber(renderEntireTree)
 
 reportWebVitals();
