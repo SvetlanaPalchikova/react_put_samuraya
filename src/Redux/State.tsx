@@ -62,7 +62,7 @@ export let store = {
     getState() {
         return this._state;
     },
-        renderEntireTree(state: StatePropsType)
+        _callSuscriber(state: StatePropsType)
     {
         console.log("State changed");
     }
@@ -75,17 +75,17 @@ export let store = {
         }
         this._state.posts.push(newPost);
         this._state.newPostText = "";
-        this.renderEntireTree(this._state);
+        this._callSuscriber(this._state);
     },
     updateNewPostText(newText: string) {
         this._state.newPostText = newText;
-        this.renderEntireTree(this._state);
+        this._callSuscriber(this._state);
     },
     onPostChange() {},
-    subscriber(observer: (state: StatePropsType) => void) {this.renderEntireTree = observer}
+    subscriber(observer: (state: StatePropsType) => void) {this._callSuscriber = observer}
 }
 
-
+// window.store = store;
 
 
 
