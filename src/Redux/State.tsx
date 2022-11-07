@@ -32,7 +32,8 @@ export type StoreTypeProps = {
     updateNewPostText: (newText: string) => void
     onPostChange: (newText: string) => void
     subscriber: (observer: (state: StatePropsType) => void) => void
-    getState: ()=> StatePropsType
+    getState: () => StatePropsType
+    dispatch: (action: { type: string, newText: string}) => void
 }
 
 export let store = {
@@ -59,14 +60,13 @@ export let store = {
         onPostChange: (newText: string) => {
         }
     },
+    _callSubscriber(state: StatePropsType){
+        console.log("State changed");
+    },
     getState() {
         return this._state;
     },
-        _callSuscriber(state: StatePropsType)
-    {
-        console.log("State changed");
-    }
-,
+    subscriber(observer: (state: StatePropsType) => void) {this._callSubscriber = observer},
     addPost() {const newPost: PostType = {
             id: new Date().getTime(),
             like: "like",
@@ -75,14 +75,33 @@ export let store = {
         }
         this._state.posts.push(newPost);
         this._state.newPostText = "";
-        this._callSuscriber(this._state);
+        this._callSubscriber(this._state);
     },
     updateNewPostText(newText: string) {
         this._state.newPostText = newText;
-        this._callSuscriber(this._state);
+        this._callSubscriber(this._state);
     },
     onPostChange() {},
-    subscriber(observer: (state: StatePropsType) => void) {this._callSuscriber = observer}
+    dispatch(action: {
+        newText: string;
+        type: string }) {
+    if (action.type === "ADD-POST"){
+        const newPost: PostType = {
+            id: new Date().getTime(),
+            like: "like",
+            message: this._state.newPostText,
+            likesCount: 0
+        }
+        this._state.posts.push(newPost);
+        this._state.newPostText = "";
+        this._callSubscriber(this._state);
+    }else if (action.type === "UPDATE-NEW-POST TEXT"){
+        this._state.newPostText = action.newText;
+        this._callSubscriber(this._state);
+    }else if(action.type ==="ON-POST-CHANGE"){
+
+    }
+    }
 }
 
 // window.store = store;

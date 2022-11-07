@@ -6,10 +6,8 @@ import {PostType} from "../../../Redux/State";
 
 export type  MyPostsType = {
     posts: Array<PostType>;
-    addPost: (text: string) => void;
     newPostText: string;
-    onPostChange: (postText: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: { type: string; newText: string }) => void
 }
 
 export const MyPosts = (props: MyPostsType) => {
@@ -17,11 +15,13 @@ export const MyPosts = (props: MyPostsType) => {
         props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like}
                                         likesCount={post.likesCount}/>)
     const addPost = () => {
-        props.addPost(props.newPostText)
+        // props.addPost(props.newPostText)
+        props.dispatch({type:"ADD-POST", newText: '' });
     }
 
     const updateNewPostTextLocal = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        // props.updateNewPostText(e.currentTarget.value)
+        props.dispatch({type: "UPDATE-NEW-POST TEXT", newText: e.currentTarget.value});
     }
 
 

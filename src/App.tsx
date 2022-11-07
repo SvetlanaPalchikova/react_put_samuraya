@@ -13,9 +13,7 @@ import {StatePropsType} from "./Redux/State";
 
 export type AppProps = {
     state: StatePropsType
-    addPost: (message: string) => void
-    updateNewPostText: (newText: string)=>void
-    onPostChange:(postText: string)=>void
+    dispatch: (action: { type: string; newText: string }) => void
 
 }
 
@@ -29,10 +27,8 @@ const App = (props: AppProps) => {
                     <Route path='/dialogs' element={<Dialogs dialogsData={props.state.dialogsData}
                                                              messagesData={props.state.messagesData}/>}/>
                     <Route path='/profile' element={<Profile posts={props.state.posts}
-                                                             addPost={props.addPost}
                                                              newPostText={props.state.newPostText}
-                                                             onPostChange={props.onPostChange}
-                                                             updateNewPostText={props.updateNewPostText}/>}/>
+                                                             dispatch = {props.dispatch}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
