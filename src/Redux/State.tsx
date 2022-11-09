@@ -25,18 +25,36 @@ export type PostType = {
 
 }
 
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newPostText: string
+}
+
+export type UpdateNewPostActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+
+export type OnPostChangeActionType = {
+    type: "ON-POST-CHANGE"
+
+}
+
+export type ActionType = UpdateNewPostActionType | AddPostActionType | OnPostChangeActionType
 export type StoreTypeProps = {
     _state: StatePropsType
-    renderEntireTree: (state: StatePropsType) => void
-    addPost: (text: string) => void
-    updateNewPostText: (newText: string) => void
+    _callSubscriber: (state: StatePropsType) => void
+    // addPost: (text: string) => void
+    // updateNewPostText: (newText: string) => void
     onPostChange: (newText: string) => void
     subscriber: (observer: (state: StatePropsType) => void) => void
     getState: () => StatePropsType
-    dispatch: (action: { type: string, newText: string}) => void
+    dispatch: (action: ActionType) => void
 }
 
-export let store = {
+
+
+export let store: StoreTypeProps = {
     _state: {
         dialogsData: [
             {id: '1', name: 'Dmitriy'},
@@ -67,24 +85,22 @@ export let store = {
         return this._state;
     },
     subscriber(observer: (state: StatePropsType) => void) {this._callSubscriber = observer},
-    addPost() {const newPost: PostType = {
-            id: new Date().getTime(),
-            like: "like",
-            message: this._state.newPostText,
-            likesCount: 0
-        }
-        this._state.posts.push(newPost);
-        this._state.newPostText = "";
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(newText: string) {
-        this._state.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+    // addPost() {const newPost: PostType = {
+    //         id: new Date().getTime(),
+    //         like: "like",
+    //         message: this._state.newPostText,
+    //         likesCount: 0
+    //     }
+    //     this._state.posts.push(newPost);
+    //     this._state.newPostText = "";
+    //     this._callSubscriber(this._state);
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state.newPostText = newText;
+    //     this._callSubscriber(this._state);
+    // },
     onPostChange() {},
-    dispatch(action: {
-        newText: string;
-        type: string }) {
+    dispatch(action) {
     if (action.type === "ADD-POST"){
         const newPost: PostType = {
             id: new Date().getTime(),
@@ -95,12 +111,26 @@ export let store = {
         this._state.posts.push(newPost);
         this._state.newPostText = "";
         this._callSubscriber(this._state);
-    }else if (action.type === "UPDATE-NEW-POST TEXT"){
+    }else if (action.type === "UPDATE-NEW-POST-TEXT"){
         this._state.newPostText = action.newText;
         this._callSubscriber(this._state);
     }else if(action.type ==="ON-POST-CHANGE"){
 
     }
+    }
+
+}
+
+export const addPostAC = (newPostText: string):AddPostActionType => {
+    return {
+        type:"ADD-POST",
+        newPostText: newPostText
+    }
+}
+export const updateNewPostTextAC = (newText: string):UpdateNewPostActionType => {
+    return {
+        type:"UPDATE-NEW-POST-TEXT",
+        newText: newText
     }
 }
 

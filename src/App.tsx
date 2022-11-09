@@ -8,12 +8,12 @@ import {Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StatePropsType} from "./Redux/State";
+import {ActionType, StatePropsType} from "./Redux/State";
 
 
 export type AppProps = {
     state: StatePropsType
-    dispatch: (action: { type: string; newText: string }) => void
+    dispatch: (action: ActionType) => void
 
 }
 
