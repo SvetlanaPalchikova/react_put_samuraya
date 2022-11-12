@@ -5,6 +5,7 @@ export type StatePropsType = {
     newPostText: string
     updateNewPostText: (newText: string) => void
     onPostChange: (newText: string) => void
+    newMessageText: string
 }
 
 export type DialogItemTypeProps = {
@@ -40,7 +41,18 @@ export type OnPostChangeActionType = {
 
 }
 
-export type ActionType = UpdateNewPostActionType | AddPostActionType | OnPostChangeActionType
+export type UpdateNewMessageActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    messageText: string
+}
+
+export type SendMessageActionType = {
+    type: "SEND-MESSAGE"
+    newMessageText: string
+}
+
+export type ActionType = SendMessageActionType | UpdateNewMessageActionType | UpdateNewPostActionType | AddPostActionType | OnPostChangeActionType
+
 export type StoreTypeProps = {
     _state: StatePropsType
     _callSubscriber: (state: StatePropsType) => void
@@ -52,10 +64,18 @@ export type StoreTypeProps = {
     dispatch: (action: ActionType) => void
 }
 
-
-
 export let store: StoreTypeProps = {
     _state: {
+        posts: [
+            {id: 1, message: "Hi, how are you?", like: 'like', likesCount: 20},
+            {id: 2, message: "It`s my first post?", like: 'like', likesCount: 0}
+        ],
+
+        newPostText: "it-kamasutra.com",
+        updateNewPostText: (newText: string) => {
+        },
+        onPostChange: (newText: string) => {
+        },
         dialogsData: [
             {id: '1', name: 'Dmitriy'},
             {id: '2', name: 'Svetlana'},
@@ -68,15 +88,7 @@ export let store: StoreTypeProps = {
             {id: '3', message: 'Yo'},
             {id: '4', message: 'Yo'}
         ],
-        posts: [
-            {id: 1, message: "Hi, how are you?", like: 'like', likesCount: 20},
-            {id: 2, message: "It`s my first post?", like: 'like', likesCount: 0}
-        ],
-        newPostText: "it-kamasutra.com",
-        updateNewPostText: (newText: string) => {
-        },
-        onPostChange: (newText: string) => {
-        }
+       newMessageText:""
     },
     _callSubscriber(state: StatePropsType){
         console.log("State changed");
@@ -114,9 +126,18 @@ export let store: StoreTypeProps = {
     }else if (action.type === "UPDATE-NEW-POST-TEXT"){
         this._state.newPostText = action.newText;
         this._callSubscriber(this._state);
-    }else if(action.type ==="ON-POST-CHANGE"){
+    }else if(action.type === "ON-POST-CHANGE"){
 
+    }else if(action.type === "UPDATE-NEW-MESSAGE-TEXT"){
+        this._state.newMessageText = action.messageText;
+        this._callSubscriber(this._state)
+    }else if(action.type === "SEND-MESSAGE"){
+        let messageText = this._state.newMessageText;
+        this._state.newMessageText = '';
+        this._state.messagesData.push({id:"5", message: messageText});
+        this._callSubscriber(this._state)
     }
+
     }
 
 }
@@ -131,6 +152,18 @@ export const updateNewPostTextAC = (newText: string):UpdateNewPostActionType => 
     return {
         type:"UPDATE-NEW-POST-TEXT",
         newText: newText
+    }
+}
+export const updateNewMessageTextAC = (messageText: string):UpdateNewMessageActionType=> {
+    return {
+        type:"UPDATE-NEW-MESSAGE-TEXT",
+        messageText: messageText
+    }
+}
+export const sendMessageAC = (newMessageText: string):SendMessageActionType => {
+    return {
+        type:"SEND-MESSAGE",
+        newMessageText: newMessageText
     }
 }
 
