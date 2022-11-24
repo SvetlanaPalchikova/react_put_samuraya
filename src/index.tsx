@@ -1,18 +1,18 @@
-
 import reportWebVitals from './reportWebVitals';
-import {StatePropsType, store} from "./Redux/State";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
+import store, {RootStoreType} from "./Redux/Redux_Store";
 
 
-export  let renderEntireTree = (state: StatePropsType)=> {
+export  let renderEntireTree = (state: RootStoreType)=> {
+    // @ts-ignore
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <App store={store}/>
+                <App store={store}  />
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')
@@ -23,6 +23,10 @@ export  let renderEntireTree = (state: StatePropsType)=> {
 
 renderEntireTree(store.getState());
 
-store.subscriber(renderEntireTree)
+
+store.subscribe(() => {
+    let state = store.getState()
+    renderEntireTree(state)
+})
 
 reportWebVitals();

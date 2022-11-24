@@ -1,4 +1,31 @@
-import {ActionType, MessagePageType, SendMessageActionType, UpdateNewMessageActionType} from "./State";
+import {AddPostActionType, UpdateNewPostActionType} from "./ProfileReducer";
+
+
+export type MessagePageType = {
+    messagesData: Array<MessageTypeProps>
+    newMessageText: string
+}
+
+export type MessageTypeProps = {
+    message: string
+    id: string
+}
+
+export type UpdateNewMessageActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    messageText: string
+}
+
+export type SendMessageActionType = {
+    type: "SEND-MESSAGE"
+    newMessageText: string
+}
+
+export type ActionType =
+    SendMessageActionType
+    | UpdateNewMessageActionType
+    // | UpdateNewPostActionType
+    // | AddPostActionType
 
 const initialState = {
     messagesData: [

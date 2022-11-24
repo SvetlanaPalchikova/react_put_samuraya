@@ -2,11 +2,17 @@ import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {StatePropsType, store} from "../../Redux/State";
-import {sendMessageAC, updateNewMessageTextAC} from "../../Redux/DialogsReducer";
+import {MessagePageType, sendMessageAC, updateNewMessageTextAC} from "../../Redux/DialogsReducer";
+import {ProfilePageType} from "../../Redux/ProfileReducer";
+import store from "../../Redux/Redux_Store";
 
 
-export const Dialogs = (props: StatePropsType) => {
+type DialogsType = {
+    profilePage: ProfilePageType
+    messagePage: MessagePageType
+}
+
+export const Dialogs = (props: DialogsType) => {
 
     const dialogsElements = props.profilePage.dialogsData.map(dialog => <DialogItem name={dialog.name}
                                                                                     id={dialog.id}/>)

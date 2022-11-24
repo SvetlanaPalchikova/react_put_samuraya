@@ -8,14 +8,11 @@ import {Route, Routes} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StoreTypeProps} from "./Redux/State";
+import {RootStoreType} from "./Redux/Redux_Store";
 
 
-export type AppProps = {
-    store: StoreTypeProps
-}
 
-const App = (props: AppProps) => {
+const App = (props: RootStoreType) => {
 
     return (
         <div className='app-wrapper'>
@@ -23,12 +20,12 @@ const App = (props: AppProps) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/dialogs' element={<Dialogs profilePage={props.store._state.profilePage}
-                                                             messagePage={props.store._state.messagePage}
+                    <Route path='/dialogs' element={<Dialogs  profilePage={props.profilePage}
+                                                             messagePage={props.messagePage}
                     />}/>
-                    <Route path='/profile' element={<Profile posts={props.store._state.profilePage.posts}
-                                                             newPostText={props.store._state.profilePage.newPostText}
-                                                             dialogsData={props.store._state.profilePage.dialogsData}/>}/>
+                    <Route path='/profile' element={<Profile posts={props.profilePage.posts}
+                                                             newPostText={props.messagePage.newMessageText}
+                                                             dialogsData={props.profilePage.dialogsData}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>

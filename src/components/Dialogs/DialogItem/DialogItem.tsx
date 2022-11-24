@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
-import {DialogItemTypeProps} from "../../../Redux/State";
+import {DialogItemTypeProps} from "../../../Redux/ProfileReducer";
+
 
 
 export const DialogItem = (props: DialogItemTypeProps) => {

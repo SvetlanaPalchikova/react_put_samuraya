@@ -1,10 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {
-    ProfilePageType, store,
-} from "../../../Redux/State";
-import {addPostAC, updateNewPostTextAC} from "../../../Redux/ProfileReducer";
+import {addPostAC, ProfilePageType} from "../../../Redux/ProfileReducer";
+import store from "../../../Redux/Redux_Store";
 
 
 export const MyPosts = (props: ProfilePageType) => {
@@ -12,11 +10,12 @@ export const MyPosts = (props: ProfilePageType) => {
         props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like}
                                         likesCount={post.likesCount}/>)
     const addPost = () => {
-        store.dispatch(addPostAC(props.newPostText));
+         props.addPost();
     }
 
     const updateNewPostTextLocal = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        store.dispatch(updateNewPostTextAC(e.currentTarget.value));
+       props.updateNewPostText(e.currentTarget.value)
+
     }
 
     return <div className={s.postsBlock}>

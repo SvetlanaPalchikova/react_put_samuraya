@@ -1,4 +1,42 @@
-import {ActionType, AddPostActionType, PostType, ProfilePageType, UpdateNewPostActionType} from "./State";
+import {SendMessageActionType, UpdateNewMessageActionType} from "./DialogsReducer";
+import {ChangeEvent} from "react";
+
+
+export type DialogItemTypeProps = {
+    name: string;
+    id: string
+}
+
+export type PostType = {
+    id: number
+    message: string;
+    like: string;
+    likesCount: number;
+}
+
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+    dialogsData: Array<DialogItemTypeProps>
+    addPost: ()=>void
+    updateNewPostText: (e: string) => void
+}
+
+export type ActionType =
+    // SendMessageActionType
+    // | UpdateNewMessageActionType
+    | UpdateNewPostActionType
+    | AddPostActionType
+
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newPostText: string
+}
+
+export type UpdateNewPostActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
 
 const initialState = {
     posts: [
@@ -10,8 +48,11 @@ const initialState = {
         {id: '2', name: 'Svetlana'},
         {id: '3', name: 'Anna'},
         {id: '4', name: 'Sergey'}
-    ]
+    ],
+    addPost : () => {},
+    updateNewPostText : () => {}
 }
+
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
