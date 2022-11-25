@@ -24,7 +24,7 @@ const App = (props: RootStoreType) => {
                     <Route path='/dialogs' element={<DialogsContainer  store={store}
                         // profilePage={props.profilePage}
                         // messagePage={props.messagePage}
-                    />}/>
+                     />}/>
                     <Route path='/profile' element={<Profile store={store}
                         // posts={props.profilePage.posts}
                         // newPostText={props.messagePage.newMessageText}

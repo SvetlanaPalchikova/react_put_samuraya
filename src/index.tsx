@@ -5,15 +5,16 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import store, {RootStoreType} from "./Redux/Redux_Store";
+import {Provider} from "react-redux";
+
 
 
 export  let renderEntireTree = (state: RootStoreType)=> {
-    // @ts-ignore
     ReactDOM.render(
         <BrowserRouter>
-            <React.StrictMode>
-                <App store={store}  />
-            </React.StrictMode>
+            <Provider store={store}>
+                <App profilePage={state.profilePage} messagePage={state.messagePage} />
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

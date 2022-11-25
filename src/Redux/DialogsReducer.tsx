@@ -1,9 +1,12 @@
 import {AddPostActionType, UpdateNewPostActionType} from "./ProfileReducer";
+import store from "./Redux_Store";
 
 
 export type MessagePageType = {
     messagesData: Array<MessageTypeProps>
     newMessageText: string
+    sendMessage: () => void,
+    updateNewMessageText: (messageText: string) => void
 }
 
 export type MessageTypeProps = {
@@ -34,7 +37,9 @@ const initialState = {
         {id: '3', message: 'Yo'},
         {id: '4', message: 'Yo'}
     ],
-    newMessageText: ""
+    newMessageText: "",
+    sendMessage: () => {},
+    updateNewMessageText: (messageText: string) => {}
 }
 const dialogsReducer = (state: MessagePageType = initialState, action: ActionType): MessagePageType => {
     switch (action.type) {
