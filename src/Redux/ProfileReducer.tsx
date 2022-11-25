@@ -18,6 +18,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     dialogsData: Array<DialogItemTypeProps>
+    // action:ActionType
     addPost: ()=>void
     updateNewPostText: (e: string) => void
 }

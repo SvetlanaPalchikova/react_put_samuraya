@@ -1,20 +1,22 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {addPostAC, ProfilePageType} from "../../../Redux/ProfileReducer";
-import store from "../../../Redux/Redux_Store";
+import {ProfilePageType} from "../../../Redux/ProfileReducer";
+
 
 
 export const MyPosts = (props: ProfilePageType) => {
     let postsElement =
-        props.posts.map((post) => <Post id={post.id} message={post.message} like={post.like}
+        props.posts.map((post) => <Post id={post.id}
+                                        message={post.message}
+                                        like={post.like}
                                         likesCount={post.likesCount}/>)
     const addPost = () => {
          props.addPost();
     }
 
     const updateNewPostTextLocal = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       props.updateNewPostText(e.currentTarget.value)
+       props.updateNewPostText(e.target.value)
 
     }
 
