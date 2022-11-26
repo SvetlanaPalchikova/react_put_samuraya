@@ -47,4 +47,6 @@ let mapDispatchToProps = (state: RootStoreType) => {
 }
 
 
-const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+export default MyPostsContainer;

@@ -8,7 +8,6 @@ import store, {RootStoreType} from "../../Redux/Redux_Store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 
-
 // type DialogsType = {
 //     profilePage: ProfilePageType
 //     messagePage: MessagePageType
@@ -36,23 +35,36 @@ import {connect} from "react-redux";
 //     )
 // }
 
-let mapStateToProps = (state: RootStoreType) => {
+type MapStateToProps = {
+    profilePage: ProfilePageType
+    messagePage: MessagePageType
+}
+
+type MapDispatchToProps = {
+    sendMessage: ()=>void
+    updateNewMessageText: (messageText: string) => void
+}
+
+
+    let mapStateToProps = (state: RootStoreType): MapStateToProps => {
     return {
         profilePage: state.profilePage,
         messagePage: state.messagePage
     }
 }
-let mapDispatchToProps = (state: RootStoreType) => {
+let mapDispatchToProps = (dispatch: any): MapDispatchToProps => {
     return {
         sendMessage: () => {
             const newMessageText = state.messagePage.newMessageText
-            store.dispatch(sendMessageAC(newMessageText))
+            dispatch(sendMessageAC(newMessageText))
         },
         updateNewMessageText: (messageText: string) => {
-            store.dispatch(updateNewMessageTextAC(messageText))
+            dispatch(updateNewMessageTextAC(messageText))
         }
     }
 }
 
 
-const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+export default DialogsContainer;

@@ -9,7 +9,8 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import store, {RootStoreType} from "./Redux/Redux_Store";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 
 
@@ -23,6 +24,7 @@ const App = (props: RootStoreType) => {
                 <Routes>
                     <Route path='/dialogs' element={<DialogsContainer  store={store}
                         // profilePage={props.profilePage}
+
                         // messagePage={props.messagePage}
                      />}/>
                     <Route path='/profile' element={<Profile store={store}

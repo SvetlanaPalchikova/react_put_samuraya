@@ -41,6 +41,8 @@ const initialState = {
     sendMessage: () => {},
     updateNewMessageText: (messageText: string) => {}
 }
+
+
 const dialogsReducer = (state: MessagePageType = initialState, action: ActionType): MessagePageType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
