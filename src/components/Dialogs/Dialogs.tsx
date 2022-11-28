@@ -2,20 +2,12 @@ import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {MessagePageType} from "../../Redux/DialogsReducer";
-import {ProfilePageType} from "../../Redux/ProfileReducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
 
-type DialogsType = {
-    profilePage: ProfilePageType
-    messagePage: MessagePageType
-    sendMessage: ()=> void
-    updateNewMessageText: (messageText: string)=> void
-}
 
-
-export const Dialogs = (props: DialogsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
 
     const dialogsElements = props.profilePage.dialogsData.map(dialog => <DialogItem name={dialog.name}
                                                                                     id={dialog.id}/>)
@@ -24,7 +16,7 @@ export const Dialogs = (props: DialogsType) => {
     const newMessageText = props.messagePage.newMessageText
 
     const onSendMessageClick = () => {
-       props.sendMessage()
+       props.sendMessage(newMessageText)
     }
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let messageText = event.target.value;

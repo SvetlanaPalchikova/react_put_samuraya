@@ -1,6 +1,3 @@
-import {SendMessageActionType, UpdateNewMessageActionType} from "./DialogsReducer";
-import {ChangeEvent} from "react";
-
 
 export type DialogItemTypeProps = {
     name: string;
@@ -18,25 +15,22 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     dialogsData: Array<DialogItemTypeProps>
-    // action:ActionType
-    addPost: ()=>void
+    addPost: (newText: string)=>void
     updateNewPostText: (e: string) => void
 }
 
 export type ActionType =
-    // SendMessageActionType
-    // | UpdateNewMessageActionType
     | UpdateNewPostActionType
     | AddPostActionType
 
 export type AddPostActionType = {
     type: "ADD-POST"
-    newPostText: string
+    newText: string
 }
 
 export type UpdateNewPostActionType = {
     type: "UPDATE-NEW-POST-TEXT"
-    newText: string
+    newPostText: string
 }
 
 const initialState = {
@@ -56,34 +50,41 @@ const initialState = {
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
-        case "ADD-POST":
-            const newPost: PostType = {
+        case "ADD-POST": {
+            const newText: PostType = {
                 id: new Date().getTime(),
                 like: "like",
                 message: state.newPostText,
                 likesCount: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = "";
-            return state;
-        case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newText);
+            stateCopy.newPostText = "";
+            return stateCopy;
+        }
+        case "UPDATE-NEW-POST-TEXT": {
+
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newPostText;
+            return stateCopy;
+        }
         default:
             return state;
+
     }
 }
 
-export const addPostAC = (newPostText: string): AddPostActionType => {
+export const addPostAC = (newText: string): AddPostActionType => {
     return {
         type: "ADD-POST",
-        newPostText: newPostText
+        newText: newText
     }
 }
-export const updateNewPostTextAC = (newText: string): UpdateNewPostActionType => {
+export const updateNewPostTextAC = (newPostText: string): UpdateNewPostActionType => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
-        newText: newText
+        newPostText: newPostText
     }
 }
 

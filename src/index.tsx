@@ -13,7 +13,7 @@ export  let renderEntireTree = (state: RootStoreType)=> {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-                <App profilePage={state.profilePage} messagePage={state.messagePage} />
+                <App />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')

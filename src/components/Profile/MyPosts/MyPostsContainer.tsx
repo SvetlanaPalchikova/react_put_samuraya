@@ -1,46 +1,46 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import store, {RootStoreType} from "../../../Redux/Redux_Store";
-import {addPostAC, ProfilePageType, updateNewPostTextAC} from "../../../Redux/ProfileReducer";
+import {
+    addPostAC,
+    DialogItemTypeProps,
+    PostType,
+    updateNewPostTextAC
+} from "../../../Redux/ProfileReducer";
 import {MyPosts} from "./MyPosts";
-import {sendMessageAC, updateNewMessageTextAC} from "../../../Redux/DialogsReducer";
 import {connect} from "react-redux";
-import {Dialogs} from "../../Dialogs/Dialogs";
+import {Dispatch} from "redux";
 
 
-// export const MyPostsContainer = (props: ProfilePageType ) => {
-//     let state = store.getState();
-//     const addPost = () => {
-//          store.dispatch(addPostAC(props.newPostText));
-//     }
-//
-//     const updateNewPostTextLocal = (newPostText: string) => {
-//         store.dispatch(updateNewPostTextAC(newPostText));
-//     }
-//
-//     return (<MyPosts
-//                      updateNewPostText={updateNewPostTextLocal}
-//                      addPost = {addPost}
-//                      posts={state.profilePage.posts}
-//                      newPostText={state.profilePage.newPostText}
-//                      dialogsData={state.profilePage.dialogsData}/>)
-//
-// }
+type mapStateToPropsType = {
+    posts: Array<PostType>
+    newPostText: string
+    dialogsData: Array<DialogItemTypeProps>
+}
 
-let mapStateToProps = (state: RootStoreType) => {
+type mapDispatchToPropsType = {
+    updateNewPostText: (newPostText: string) => void,
+    addPost: (newPost: string) => void
+}
+
+export type MyPostsType = mapStateToPropsType & mapDispatchToPropsType
+
+let mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
         dialogsData: state.profilePage.dialogsData
     }
 }
-let mapDispatchToProps = (state: RootStoreType) => {
+
+
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         updateNewPostText: (newPostText: string) => {
             store.dispatch(updateNewPostTextAC(newPostText));
         },
 
-        addPost: () => {
-            store.dispatch(addPostAC(state.profilePage.newPostText));
+        addPost: (newPost: string) => {
+            store.dispatch(addPostAC(newPost));
         }
 
     }
