@@ -27,8 +27,8 @@ export type SendMessageActionType = {
 export type ActionType =
     SendMessageActionType
     | UpdateNewMessageActionType
-    // | UpdateNewPostActionType
-    // | AddPostActionType
+// | UpdateNewPostActionType
+// | AddPostActionType
 
 const initialState = {
     messagesData: [
@@ -38,26 +38,28 @@ const initialState = {
         {id: '4', message: 'Yo'}
     ],
     newMessageText: "",
-    sendMessage: () => {},
-    updateNewMessageText: (messageText: string) => {}
+    sendMessage: () => {
+    },
+    updateNewMessageText: (messageText: string) => {
+    }
 }
 
 
 const dialogsReducer = (state: MessagePageType = initialState, action: ActionType): MessagePageType => {
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-TEXT": {
-            let copyState = {...state}
-            copyState.newMessageText = action.messageText;
-            return copyState;
-        }
-        case "SEND-MESSAGE": {
-            let copyState = {...state}
-            copyState.messagesData = [...state.messagesData]
-            let messageText = copyState.newMessageText;
-            copyState.newMessageText = '';
-            copyState.messagesData.push({id: "5", message: messageText});
-            return copyState;
-        }
+        case "UPDATE-NEW-MESSAGE-TEXT":
+            return {
+                ...state,
+                newMessageText: action.messageText
+            }
+        case "SEND-MESSAGE":
+            let messageText = state.newMessageText;
+            return{
+                ...state,
+                newMessageText: '',
+                messagesData: [...state.messagesData, {id: "5", message: messageText}]
+            }
+
         default:
             return state;
     }

@@ -3,6 +3,6 @@ import  s from './Header.module.css';
 
 export const Header = () => {
     return <header className={s.header}>
-        <img src='https://nashiptichki.ru/wp-content/uploads/2018/07/%D0%B5%D0%B5%D0%B5%D0%B5%D0%B5.jpg'/>
+        <img src='https://www.passion.ru/thumb/860x0/filters:quality(75):no_upscale()/imgs/2018/04/01/17/2005349/17497cd69c2e9e829f370f97c83bcbf52d91206b.jpg'/>
     </header>;
 }
