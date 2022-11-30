@@ -27,8 +27,6 @@ export type SendMessageActionType = {
 export type ActionType =
     SendMessageActionType
     | UpdateNewMessageActionType
-// | UpdateNewPostActionType
-// | AddPostActionType
 
 const initialState = {
     messagesData: [
