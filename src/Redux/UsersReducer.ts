@@ -1,23 +1,36 @@
 
 
 
-export type UserType = {
-    id: number
-    photoUrl: string
+// export type UserType = {
+//     id: number
+//     photoUrl: string
+//     followed: boolean
+//     fullName: string
+//     status: string
+//     location: LocationPropsType
+// }
+
+export type UserPageType = {
+    name: string,
+    id: number,
+    uniqueUrlName: null,
+    photos: {
+        small: null,
+        large: null
+    },
+    status: null,
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationPropsType
+
 }
 
 export type UsersPropsType ={
-    users: Array<UserType>
+    users: Array<UserPageType>
 }
 
-type LocationPropsType = {
-    city: string
-    country: string
-}
+// type LocationPropsType = {
+//     city: string
+//     country: string
+// }
 
 type FollowActionType = {
     type: "FOLLOW"
@@ -31,7 +44,7 @@ type UnFollowActionType = {
 
 type SetUsersActionType = {
     type: "SET-USERS"
-    users: Array<UserType>
+    users: Array<UserPageType>
 }
 
 type ActionType = FollowActionType | UnFollowActionType | SetUsersActionType
@@ -85,7 +98,7 @@ export const unFollowAC = (userId: number): UnFollowActionType => {
         userId
     }
 }
-export const setUsersAC = (users: Array<UserType>): SetUsersActionType => {
+export const setUsersAC = (users: Array<UserPageType>): SetUsersActionType => {
     return {
         type: "SET-USERS",
         users
