@@ -4,19 +4,17 @@ import {RootUsersType} from "./UsersContainer";
 import  axios from 'axios'
 import userPhoto from "../../assets/images/avatar.png"
 
-class Users extends React.Component {
-    getUsers =()=> {
-        if (this.props.users.length === 0) {
+class Users extends React.Component<RootUsersType> {
+    constructor (props: RootUsersType) {
+        super(props);
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 debugger
                 this.props.setUsers(response.data.items)
             })
-        }
     }
 
     render() {
         return <div>
-            <button onClick={this.getUsers}>Get Users</button>
 
             {
                 this.props.users.map(u => <div key={u.id}>
