@@ -5,12 +5,12 @@ import  axios from 'axios'
 import userPhoto from "../../assets/images/avatar.png"
 
 class Users extends React.Component<RootUsersType> {
-    constructor (props: RootUsersType) {
-        super(props);
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                debugger
-                this.props.setUsers(response.data.items)
-            })
+
+    componentDidMount(): void {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            debugger
+            this.props.setUsers(response.data.items)
+        })
     }
 
     render() {
