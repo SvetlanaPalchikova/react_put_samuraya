@@ -1,15 +1,4 @@
 
-
-
-// export type UserType = {
-//     id: number
-//     photoUrl: string
-//     followed: boolean
-//     fullName: string
-//     status: string
-//     location: LocationPropsType
-// }
-
 export type UserPageType = {
     name: string,
     id: number,
@@ -20,17 +9,14 @@ export type UserPageType = {
     },
     status: null,
     followed: boolean
-
 }
 
 export type UsersPropsType ={
     users: Array<UserPageType>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
 }
-
-// type LocationPropsType = {
-//     city: string
-//     country: string
-// }
 
 type FollowActionType = {
     type: "FOLLOW"
@@ -51,7 +37,9 @@ type ActionType = FollowActionType | UnFollowActionType | SetUsersActionType
 
 const initialState = {
     users: [],
-
+    pageSize:5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 const usersReducer = (state: UsersPropsType = initialState, action: ActionType): UsersPropsType => {

@@ -9,6 +9,9 @@ import {Dispatch} from "redux";
 type mapStateToPropsType = {
     usersPage: UsersPropsType
     users: Array<UserPageType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type mapDispatchToPropsType = {
@@ -22,7 +25,10 @@ type mapDispatchToPropsType = {
 let mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
     return{
         usersPage: state.usersPage,
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
