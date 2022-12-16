@@ -32,14 +32,18 @@ type SetUsersActionType = {
     type: "SET-USERS"
     users: Array<UserPageType>
 }
+type SetCurrentPageActionType = {
+    type: "SET-CURRENT-PAGE"
+    currentPage: number
+}
 
-type ActionType = FollowActionType | UnFollowActionType | SetUsersActionType
+type ActionType = FollowActionType | UnFollowActionType | SetUsersActionType | SetCurrentPageActionType
 
 const initialState = {
     users: [],
     pageSize:5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 2,
 }
 
 const usersReducer = (state: UsersPropsType = initialState, action: ActionType): UsersPropsType => {
@@ -66,7 +70,10 @@ const usersReducer = (state: UsersPropsType = initialState, action: ActionType):
                     })
                 }
         case "SET-USERS": {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case "SET-CURRENT-PAGE": {
+            return {...state, currentPage: action.currentPage}
         }
         default:
             return state;
@@ -92,5 +99,14 @@ export const setUsersAC = (users: Array<UserPageType>): SetUsersActionType => {
         users
     }
 }
+
+export const SetCurrentPageAC = (currentPage: number): SetCurrentPageActionType => {
+   return {
+        type: "SET-CURRENT-PAGE",
+        currentPage
+    }}
+
+
+
 
 export default usersReducer;

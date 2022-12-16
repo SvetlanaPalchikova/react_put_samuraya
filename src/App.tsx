@@ -14,8 +14,6 @@ import UsersContainer from "./components/USERS/UsersContainer";
 
 
 const App = () => {
-
-    // @ts-ignore
     return (
         <div className='app-wrapper'>
             <Header/>

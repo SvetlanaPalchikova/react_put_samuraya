@@ -3,18 +3,27 @@ import styles from './Users.module.css'
 import {RootUsersType} from "./UsersContainer";
 import axios from 'axios'
 import userPhoto from "../../assets/images/avatar.png"
+import {UsersPropsType} from "../../Redux/UsersReducer";
 
-class Users extends React.Component<RootUsersType> {
+
+
+class Users extends React.Component<RootUsersType > {
 
     componentDidMount(): void {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
             this.props.setUsers(response.data.items)
         })
     }
-
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
     render() {
-        let pagesCount = this.props.totalUsersCount / this.props.pageSize
+        let pagesCount =Math.ceil( this.props.totalUsersCount / this.props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i);
@@ -22,7 +31,10 @@ class Users extends React.Component<RootUsersType> {
         return <div>
             <div>
                 {pages.map(page => {
-                    <span className={this.props.currentPage === page && styles.selectedPage}>{page}</span>
+                  return  <span className={this.props.currentPage === page ? styles.selectedPage : ""}
+                      onClick = {(e) => {this.onPageChanged(page);}}>
+                      {page}
+                  </span>
                 })}
 
             </div>
