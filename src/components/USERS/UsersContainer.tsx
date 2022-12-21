@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from "react-redux";
-import Users from "./UsersC";
+import Users from "./Users";
 import {RootStoreType} from "../../Redux/Redux_Store";
 import {
     followAC,
-    SetCurrentPageAC,
+    SetCurrentPageAC, setTotalUsersCountAC,
     setUsersAC,
     unFollowAC,
     UserPageType,
@@ -26,7 +26,7 @@ type mapDispatchToPropsType = {
     unFollow: (userId: number) => void
     setUsers:(users: Array<UserPageType>) => void
     setCurrentPage: (pageNumber:number) => void
-}
+    setTotalUsersCount: (totalCount: number) => void}
 
  export type RootUsersType = mapStateToPropsType&mapDispatchToPropsType
 
@@ -54,6 +54,9 @@ let  mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         },
         setCurrentPage: (pageNumber) => {
             dispatch(SetCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount: (totalCount) => {
+            dispatch(setTotalUsersCountAC(totalCount))
         }
     }
 }

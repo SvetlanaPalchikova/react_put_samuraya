@@ -37,7 +37,11 @@ type SetCurrentPageActionType = {
     currentPage: number
 }
 
-type ActionType = FollowActionType | UnFollowActionType | SetUsersActionType | SetCurrentPageActionType
+type setTotalUsersCountActionType = {
+    type: "SET-TOTAL-COUNT"
+    count: number
+}
+type ActionType = setTotalUsersCountActionType |FollowActionType | UnFollowActionType | SetUsersActionType | SetCurrentPageActionType
 
 const initialState = {
     users: [],
@@ -75,6 +79,9 @@ const usersReducer = (state: UsersPropsType = initialState, action: ActionType):
         case "SET-CURRENT-PAGE": {
             return {...state, currentPage: action.currentPage}
         }
+        case "SET-TOTAL-COUNT": {
+            return {...state, totalUsersCount: action.count}
+        }
         default:
             return state;
 
@@ -104,6 +111,12 @@ export const SetCurrentPageAC = (currentPage: number): SetCurrentPageActionType 
    return {
         type: "SET-CURRENT-PAGE",
         currentPage
+    }}
+
+export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCountActionType => {
+   return {
+        type:  "SET-TOTAL-COUNT",
+       count: totalUsersCount
     }}
 
 
