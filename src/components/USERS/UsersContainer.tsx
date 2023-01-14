@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from "react-redux";
-import Users from "./Users";
 import {RootStoreType} from "../../Redux/Redux_Store";
 import {
     followAC,
@@ -11,6 +10,7 @@ import {
     UsersPropsType
 } from "../../Redux/UsersReducer";
 import {Dispatch} from "redux";
+import UsersAPIComponent from "./UsersAPIComponent";
 
 
 type mapStateToPropsType = {
@@ -60,4 +60,4 @@ let  mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
