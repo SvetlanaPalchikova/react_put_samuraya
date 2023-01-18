@@ -16,6 +16,9 @@ export type UsersPropsType ={
     pageSize: number,
     totalUsersCount: number
     currentPage: number
+    // follow: boolean
+    // unFollow: boolean
+    // onPageChanged: () => void
 }
 
 type FollowActionType = {
@@ -48,6 +51,9 @@ const initialState = {
     pageSize:20,
     totalUsersCount: 0,
     currentPage: 2,
+    // follow: true,
+    // unFollow: false,
+    // onPageChanged: 0
 }
 
 const usersReducer = (state: UsersPropsType = initialState, action: ActionType): UsersPropsType => {

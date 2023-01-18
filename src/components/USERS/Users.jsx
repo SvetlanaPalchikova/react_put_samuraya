@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/avatar.png";
 import {UsersPropsType} from "../../Redux/UsersReducer";
+import {RootUsersType} from "./UsersContainer";
 
-export const Users = (props: UsersPropsType) => {
+export const Users = (props: RootUsersType) => {
     let pagesCount =Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
