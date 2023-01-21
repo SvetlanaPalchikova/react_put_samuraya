@@ -1,10 +1,19 @@
 import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/avatar.png";
-import {UsersPropsType} from "../../Redux/UsersReducer";
-import {RootUsersType} from "./UsersContainer";
+import {UserType} from "../../Redux/UsersReducer";
 
-export const Users = (props: RootUsersType) => {
+type UsersPropsType = {
+    users: Array<UserType>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
+    onPageChanged: (page: number) => void
+    unFollow: (id: number) => void
+    follow: (id: number) => void
+ }
+
+export const Users = (props: UsersPropsType) => {
     let pagesCount =Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {

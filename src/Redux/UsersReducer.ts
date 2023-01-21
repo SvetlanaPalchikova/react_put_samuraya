@@ -1,5 +1,5 @@
 
-export type UserPageType = {
+export type UserType = {
     name: string,
     id: number,
     uniqueUrlName: null,
@@ -11,14 +11,11 @@ export type UserPageType = {
     followed: boolean
 }
 
-export type UsersPropsType ={
-    users: Array<UserPageType>
+export type InitialStateType ={
+    users: Array<UserType>
     pageSize: number,
     totalUsersCount: number
     currentPage: number
-    // follow: boolean
-    // unFollow: boolean
-    // onPageChanged: () => void
 }
 
 type FollowActionType = {
@@ -33,7 +30,7 @@ type UnFollowActionType = {
 
 type SetUsersActionType = {
     type: "SET-USERS"
-    users: Array<UserPageType>
+    users: Array<UserType>
 }
 type SetCurrentPageActionType = {
     type: "SET-CURRENT-PAGE"
@@ -51,12 +48,10 @@ const initialState = {
     pageSize:20,
     totalUsersCount: 0,
     currentPage: 2,
-    // follow: true,
-    // unFollow: false,
-    // onPageChanged: 0
+    isFetching: false
 }
 
-const usersReducer = (state: UsersPropsType = initialState, action: ActionType): UsersPropsType => {
+const usersReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {
@@ -106,7 +101,7 @@ export const unFollowAC = (userId: number): UnFollowActionType => {
         userId
     }
 }
-export const setUsersAC = (users: Array<UserPageType>): SetUsersActionType => {
+export const setUsersAC = (users: Array<UserType>): SetUsersActionType => {
     return {
         type: "SET-USERS",
         users
