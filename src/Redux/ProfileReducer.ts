@@ -11,17 +11,24 @@ export type PostType = {
     likesCount: number;
 }
 
+export type ProfileTypeProps = {
+    profile: null
+}
+
+
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     dialogsData: Array<DialogItemTypeProps>
     addPost: (newText: string)=>void
     updateNewPostText: (e: string) => void
+    profile: ProfileTypeProps
 }
 
 export type ActionType =
     | UpdateNewPostActionType
     | AddPostActionType
+    | setUsersProfileType
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -32,6 +39,12 @@ export type UpdateNewPostActionType = {
     type: "UPDATE-NEW-POST-TEXT"
     newPostText: string
 }
+
+export type setUsersProfileType = {
+    type: "SET-USER-PROFILE"
+    profile: ProfileTypeProps
+}
+
 
 const initialState = {
     posts: [
@@ -45,7 +58,8 @@ const initialState = {
         {id: '4', name: 'Sergey'}
     ],
     addPost : () => {},
-    updateNewPostText : () => {}
+    updateNewPostText : () => {},
+    profile: null
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
@@ -67,6 +81,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
                 ...state,
                 newPostText: action.newPostText
             }
+            case "SET-USER-PROFILE":
+             return {...state, profile: action.profile}
 
         default:
             return state;
@@ -74,17 +90,24 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
     }
 }
 
-export const addPostAC = (newText: string): AddPostActionType => {
+export const addPost = (newText: string): AddPostActionType => {
     return {
         type: "ADD-POST",
         newText: newText
     }
 }
-export const updateNewPostTextAC = (newPostText: string): UpdateNewPostActionType => {
+export const updateNewPostText = (newPostText: string): UpdateNewPostActionType => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newPostText: newPostText
     }
+
+export const setUsersProfile = (profile: ProfileTypeProps): setUsersProfileType => {
+    return {
+        type: "SET-USER-PROFILE",
+        profile: profile
+    }
+
 }
 
 export default profileReducer;

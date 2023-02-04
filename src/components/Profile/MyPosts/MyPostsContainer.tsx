@@ -1,14 +1,16 @@
 import React from "react";
 import store, {RootStoreType} from "../../../Redux/Redux_Store";
 import {
-    addPostAC,
+    addPost,
     DialogItemTypeProps,
     PostType,
-    updateNewPostTextAC
+    updateNewPostText
 } from "../../../Redux/ProfileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+
+
 
 
 type mapStateToPropsType = {
@@ -28,25 +30,25 @@ let mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        dialogsData: state.profilePage.dialogsData
+        dialogsData: state.profilePage.dialogsData,
     }
 }
 
 
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        updateNewPostText: (newPostText: string) => {
-            store.dispatch(updateNewPostTextAC(newPostText));
-        },
+// let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+//     return {
+//         updateNewPostText: (newPostText: string) => {
+//             store.dispatch(updateNewPostText(newPostText));
+//         },
+//
+//         addPost: (newPost: string) => {
+//             store.dispatch(addPost(newPost));
+//         }
+//
+//     }
+// }
 
-        addPost: (newPost: string) => {
-            store.dispatch(addPostAC(newPost));
-        }
 
-    }
-}
-
-
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {updateNewPostText, addPost })(MyPosts)
 
 export default MyPostsContainer;
