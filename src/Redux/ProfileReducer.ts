@@ -11,8 +11,26 @@ export type PostType = {
     likesCount: number;
 }
 
-export type ProfileTypeProps = {
-    profile: null
+export type ProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        website: null | string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: null | string,
+        github: string,
+        mainLink: null | string
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
 }
 
 
@@ -20,9 +38,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     dialogsData: Array<DialogItemTypeProps>
-    addPost: (newText: string)=>void
-    updateNewPostText: (e: string) => void
-    profile: ProfileTypeProps
+    profile: ProfileType | null
 }
 
 export type ActionType =
@@ -42,7 +58,7 @@ export type UpdateNewPostActionType = {
 
 export type setUsersProfileType = {
     type: "SET-USER-PROFILE"
-    profile: ProfileTypeProps
+    profile: ProfileType
 }
 
 
@@ -57,8 +73,6 @@ const initialState = {
         {id: '3', name: 'Anna'},
         {id: '4', name: 'Sergey'}
     ],
-    addPost : () => {},
-    updateNewPostText : () => {},
     profile: null
 }
 
@@ -101,8 +115,9 @@ export const updateNewPostText = (newPostText: string): UpdateNewPostActionType 
         type: "UPDATE-NEW-POST-TEXT",
         newPostText: newPostText
     }
+}
 
-export const setUsersProfile = (profile: ProfileTypeProps): setUsersProfileType => {
+export const setUsersProfile = (profile: ProfileType): setUsersProfileType => {
     return {
         type: "SET-USER-PROFILE",
         profile: profile
