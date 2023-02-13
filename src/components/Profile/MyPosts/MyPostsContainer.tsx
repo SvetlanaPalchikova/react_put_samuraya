@@ -1,5 +1,5 @@
 import React from "react";
-import store, {RootStoreType} from "../../../Redux/Redux_Store";
+import {RootStoreType} from "../../../Redux/Redux_Store";
 import {
     addPost,
     DialogItemTypeProps,
@@ -8,7 +8,6 @@ import {
 } from "../../../Redux/ProfileReducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 
 
 
@@ -33,21 +32,6 @@ let mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
         dialogsData: state.profilePage.dialogsData,
     }
 }
-
-
-// let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-//     return {
-//         updateNewPostText: (newPostText: string) => {
-//             store.dispatch(updateNewPostText(newPostText));
-//         },
-//
-//         addPost: (newPost: string) => {
-//             store.dispatch(addPost(newPost));
-//         }
-//
-//     }
-// }
-
 
 const MyPostsContainer = connect(mapStateToProps, {updateNewPostText, addPost })(MyPosts)
 

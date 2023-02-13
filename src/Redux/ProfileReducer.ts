@@ -33,7 +33,6 @@ export type ProfileType = {
     }
 }
 
-
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string

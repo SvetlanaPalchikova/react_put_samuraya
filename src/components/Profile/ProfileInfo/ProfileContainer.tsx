@@ -1,8 +1,6 @@
 import React from "react";
-import s from './Profile.module.css';
 import {Profile} from "../Profile";
-import {MyPostsType} from "../MyPosts/MyPostsContainer";
-import {ProfilePageType, ProfileType, setUsersProfile} from "../../../Redux/ProfileReducer";
+import {ProfileType, setUsersProfile} from "../../../Redux/ProfileReducer";
 import axios from "axios";
 import {connect} from "react-redux";
 import {RootStoreType} from "../../../Redux/Redux_Store";
@@ -13,25 +11,22 @@ import {RootStoreType} from "../../../Redux/Redux_Store";
 }
 
  export type MapDispatchToPropsProfileType = {
-    setUsersProfile: (profile: ProfileType) => void
+    setUsersProfile: (profile: ProfileType | null) => void
 }
-
 
 class ProfileContainer extends React.Component<MapStateToPropsProfileType & MapDispatchToPropsProfileType> {
     componentDidMount(): void {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
-                this.props.setUsersProfile(response.data.items)
-
+                this.props.setUsersProfile(response.data)
             });
 
 }
 
     render() {
-        return <div className={s.content}>
-                <Profile {...this.props}/>
+        return <div>
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>
-
     }
 }
 
@@ -39,4 +34,5 @@ let mapStateToProps = (state: RootStoreType): MapStateToPropsProfileType => ({
     profile: state.profilePage.profile
 })
 
+// @ts-ignore
 export default connect(mapStateToProps, {setUsersProfile})(ProfileContainer);
